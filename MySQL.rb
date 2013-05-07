@@ -105,15 +105,15 @@ def get_mysql_stats(options)
         # Define some indexes so they don't cause errors with += operations
         'relay_log_space'           => nil,
         'binary_log_space'          => nil,
-        'current_transactions'      => 0,
-        'locked_transactions'       => 0,
-        'active_transactions'       => 0,
-        'innodb_locked_tables'      => 0,
-        'innodb_tables_in_use'      => 0,
-        'innodb_lock_structs'       => 0,
-        'innodb_lock_wait_secs'     => 0,
-        'innodb_sem_waits'          => 0,
-        'innodb_set_wait_time_ms'   => 0,
+        'current_transactions'      => nil,
+        'locked_transactions'       => nil,
+        'active_transactions'       => nil,
+        'innodb_locked_tables'      => nil,
+        'innodb_tables_in_use'      => nil,
+        'innodb_lock_structs'       => nil,
+        'innodb_lock_wait_secs'     => nil,
+        'innodb_sem_waits'          => nil,
+        'innodb_set_wait_time_ms'   => nil,
         # Values for the 'state' column from SHOW PROCESSLIST (converted to
         # lowercase, with spaces replaced by underscores)
         'State_closing_tables'      => nil,
@@ -1087,5 +1087,7 @@ log_debug(['Final result', output])
 # Send to graphs
 output.each do |metric|
     metricpath, metricvalue, metrictimestamp = metric.split
-    Sendit metricpath, metricvalue, metrictimestamp
+    if metricvalue.to_i >= 0
+        Sendit metricpath, metricvalue, metrictimestamp
+    end
 end

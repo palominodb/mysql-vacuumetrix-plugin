@@ -16,10 +16,14 @@ Usage:
             --nocache                    Do not cache results in a file (default: false)
         -h, --help                       Show this message
 
+Dependencies:
+
+    gem install mysql
 
 1. Move the script to vacuumetrix's bin directory
 
-    `mv GetMySqlStats.rb path/to/vacuumetrix/bin/`
+        mv GetMySqlStats.rb path/to/vacuumetrix/bin/
+
 2. Add and configure the following to the vacuumetrix config file. These are used as default values.
     
         $nocache = false
@@ -31,4 +35,4 @@ Usage:
 
 3. Add it to the crontab.
 
-    `*   *   *   *   *   /path/to/vacuumetrix/bin/MySQL.rb `
+        *   *   *   *   *   /path/to/vacuumetrix/bin/MySQL.rb
